@@ -18,13 +18,13 @@
         
         function preview()
         {
-            $url = $this->input->post('url');
+            $sitetitle = $this->input->post('title');
             $ch = curl_init();
             // configuration des options
 
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_URL, $sitetitle);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
             $reg_title = $desc= $pictures ='';  
             $res = curl_exec($ch);
@@ -36,18 +36,19 @@
                 preg_match('#<title>(.*)<\/title>#i',$res,$reg_title);
                 $title = $reg_title[1];                
             }
-            else
-            {
-                $title = 'Titre absent';
-            }
+
             //var_dump($reg_title);
             
 
             // Recuperation de la description
-            $startchar = substr($url, 0, 4);
+            $startchar = substr($sitetitle, 0, 4);
             if (!($startchar == 'http'))
             {
-                $url = 'http://'.$url;
+                $url = 'http://'.$sitetitle;
+            }
+            else
+            {
+                $url = $sitetitle;
             }
 
             if (preg_match('#<meta name=[\"|\']description["\|\'] content=["\|\'](.*)["\|\']#i',$res))
@@ -58,25 +59,50 @@
             
 
             // Recuperation des images
-            if (preg_match('#<img src=["\|\'](.*)["\|\']#i',$res))
+            if (preg_match('#<img src=["\|\']([^\'"]*)["\|\']#i',$res))
             {
-                preg_match('#<img src=["\|\'](.*)["\|\']#i',$res,$pictures);                
+                preg_match_all('#<img src=["\|\']([^\'"]*)["\|\']#i',$res,$pictures);                
             }            
-            var_dump($pictures);
-
-            echo('<p>Titre du site: '.$title.' </p>');
+            //var_dump($pictures[1]);
+            $data['title'] = $sitetitle;
+            $data['desc'] = $description;
+            $data['link'] = $url;
+            $dataout = array('titre' => $data['title'],'description' => $data['desc'], 'link'=>$data['link'] );
+            $this->load->view('vueAdd.php',$dataout);
+            //var_dump($dataout);
+           /* echo('<p>Titre du site: '.$title.' </p>');
             echo('<p>Description: '.$description.' </p>');
-           /* foreach ($pictures[0] as $picture ) {
-                echo('<li>Images: '.$pictures[0].' </li>');
-            }*/
-            
+            foreach ($pictures[1] as $picture ) {
+                //Creation de la miniature
+               /* $config['image_library'] = 'gd2';
+                $config['source_image'] = '$picture';
+                $config['create_thumb'] = TRUE;
+                $config['maintain_ratio'] = TRUE;
+                $config['width']     = 75;
+                $config['height']   = 80;
+                $this->load->library('image_lib', $config);
+                if ( ! $this->image_lib->resize())
+                {
+                    echo $this->image_lib->display_errors();
+                }
+                $pict = $this->image_lib->resize();
+                echo('<li><img src="'.$picture.'" /></li>');
+            }*/               
         }
         
-        function add()
+        function add($dataout)
         {
             $this->load->model('liensModele');
-            $this->liensModele->add($this->input->post('title'));
-            $this->logged();
+            $this->liensModele->add($db_updated);
+            $this->index();
+        }
+
+        function update()
+        {
+           $this->load->model('liensModele');
+           $data['id'] = $this->input->post('id');
+           $data['title'] = $this->input->post('title');     
+           $this->liensModele->update($this->uri->segment(3));
         }
         
         function delete()
@@ -94,6 +120,15 @@
                 $data['vue']="ok";
                 $this->load->view("ok");
             }
+            $this->index();
         }
+
+        function selectOne()
+        {
+            $this->load->model('liensModele');
+            $data['lien'] = $this->liensModele->selectOne($this->uri->segment(3));
+            $this->load->view('vueUpdate',$data);
+            $this->liensModele->update($this->uri->segment(3));
+        }        
         
     }

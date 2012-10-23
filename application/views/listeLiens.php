@@ -13,8 +13,8 @@
                 <?php echo(form_open('site/preview')); ?>
                  <?php echo(form_label('Lien a ajouter ','title')); ?>
                   <?php echo(form_input(array(
-                                              'name' => 'url',
-                                              'id' => 'url',
+                                              'name' => 'title',
+                                              'id' => 'title',
                                               'value' => '',
                                               'placeholder' => 'Entrez une URL'
                                               ))); ?>
@@ -32,7 +32,7 @@
                 foreach($liens as $lien)
                 {
             ?>
-                    <li><?php echo($lien->title); ?> <a href="site/edit" title="Modifier">Modifier</a>  <a href="site/delete" class="delete" title="Supprimer">Supprimer</a></li>
+                    <li><?php echo($lien->title); ?>  - <?php echo(anchor('site/delete/','supprimer',array('title' => 'Supprimer ce lien')) ); ?> - <?php echo(anchor('site/selectOne/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?> </li>
             <?php        
                 }
             ?>
