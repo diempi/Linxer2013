@@ -28,7 +28,7 @@
                 $this->db->insert('liens',array('title' => $titre,'desc' => $description, 'link' => $link));
             }  
 
-            function delete($id)
+            function deleteOne($id)
             {
                 $this->db->delete('liens',array('id' => $id));
             }

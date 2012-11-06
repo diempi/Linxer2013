@@ -39,7 +39,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                        <a href="#"><h1 class="brand">Linkser</h1></a>
+                        <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
                 </div>
             </div>
         </div>

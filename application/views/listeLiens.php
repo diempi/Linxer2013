@@ -11,7 +11,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                        <a href="#"><h1 class="brand">Linkser</h1></a>
+                        <a href="<?php base_url(); ?>"><h1 class="brand">Linkser</h1></a>
                 </div>
               </div>
          </div>
@@ -39,7 +39,7 @@
                         foreach($liens as $lien)
                         {
                     ?>
-                            <li><?php echo($lien->title); ?>  - <?php echo(anchor('site/confirm','supprimer',array('title' => 'Supprimer ce lien')) ); ?> - <?php echo(anchor('site/preview/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?> </li>
+                            <li><?php echo($lien->title); ?>  <?php echo(anchor('site/edit_preview/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
                     <?php        
                         }
                     ?>
@@ -48,7 +48,8 @@
                     <?php echo 
             form_open('main/signoff').
             form_submit(array(
-                              'value' =>'Se deconnecter'
+                              'value' =>'Se deconnecter',
+                              'class','btn'
                              )).
             form_close(); ?>
                 </ul>

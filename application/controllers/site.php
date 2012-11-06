@@ -1,7 +1,13 @@
 <?php
 
     class Site extends CI_Controller{
-        
+            
+        public function __construct()
+        {
+            parent:: __construct();
+            $this->load->model('liensModele');
+        }
+
         function index()
         {    
             $this->load->model('liensModele');
@@ -63,7 +69,7 @@
             {
                 preg_match_all('#<img src=["\|\']([^\'"]*)["\|\']#i',$res,$pictures);                
             }            
-            //var_dump($pictures[1]);
+            var_dump($description);
             $data['title'] = $sitetitle;
             $data['desc'] = $description;
             $data['link'] = $url;
@@ -72,53 +78,58 @@
             //var_dump($dataout);
            /* echo('<p>Titre du site: '.$title.' </p>');
             echo('<p>Description: '.$description.' </p>');
-            foreach ($pictures[1] as $picture ) {
+            */foreach ($pictures[1] as $picture ) {
                 //Creation de la miniature
-               /* $config['image_library'] = 'gd2';
-                $config['source_image'] = '$picture';
+                
+               /* $config['image_library'] = 'gd';
+                $config['source_image'] = $picture;                
+                $config['new_image'] = $_SERVER['DOCUMENT_ROOT'].'/linkser/img/thumbs/'.$picture;                  
+                //$config['source_image'] = '$picture';
                 $config['create_thumb'] = TRUE;
                 $config['maintain_ratio'] = TRUE;
                 $config['width']     = 75;
                 $config['height']   = 80;
                 $this->load->library('image_lib', $config);
+                $this->image_lib->initialize($config); */
+                //var_dump($picture);
                 if ( ! $this->image_lib->resize())
                 {
                     echo $this->image_lib->display_errors();
                 }
                 $pict = $this->image_lib->resize();
                 echo('<li><img src="'.$picture.'" /></li>');
-            }*/               
+            }               
         }
         
-        function edit_preview($id)
+        function edit_preview()
         {
-            $this->load->model('liensModele');
-            $data['id'] = $this->input->post('id');   
-            $this->load->view('vueAdd.php',$dataout);         
+            $this->preview();        
         }
         function confirm()
         {
+            $data['title'] = $this->input->post('title'); 
+            $data['desc'] = $this->input->post('desc');               
+            $data['link'] = $this->input->post('link');  
             $this->load->view('confirm');
         }
         function add($dataout)
         {
-            $this->load->model('liensModele');
             $this->liensModele->add($db_updated);
             $this->index();
         }
 
         function update()
         {
-           $this->load->model('liensModele');
            $data['id'] = $this->input->post('id');
-           $data['title'] = $this->input->post('title');     
+           $data['title'] = $this->input->post('title'); 
+           $data['desc'] = $this->input->post('desc');               
+           $data['link'] = $this->input->post('link');  
            $this->liensModele->update($this->uri->segment(3));
         }
         
         function delete()
         {
-            $this->load->model('liensModele');
-            $this->liensModele->delete($this->uri->segment(3));
+            $this->liensModele->deleteOne($this->input->post('id'));
 
             /*deleteOne($id);
             if($this->input->is_ajax_request())
@@ -135,7 +146,6 @@
 
         function selectOne()
         {
-            $this->load->model('liensModele');
             $data['lien'] = $this->liensModele->selectOne($this->uri->segment(3));
             $this->load->view('vueUpdate',$data);
             $this->liensModele->update($this->uri->segment(3));
