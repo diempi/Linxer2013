@@ -23,7 +23,8 @@
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="<?php base_url(); ?>css/style.css">
+  <link rel="stylesheet" href="<?php base_url(); ?>css/style.css">  
+  <link rel="stylesheet" href="<?php base_url(); ?>css/bootstrap.min.css">
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -35,21 +36,23 @@
 </head>
 
 <body>
-
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                        <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
+                </div>
+            </div>
+        </div>
   <div id="container">
-    <header>
-        <h1>Linkser</h1>
-    </header>
-    <div id="main" role="main">
+    <div id="main" role="main" class="hero-unit">
         <div id="content">
             <?php echo($content); ?>
         </div>
     </div>
-    <footer>
-            <p>Coded by Didier Gabiam</p>
-    </footer>
   </div> <!--! end of #container -->
-
+    <footer>
+            <p>© Coded by Didier Gabiam</p>
+    </footer>
 
   <!-- JavaScript at the bottom for fast page loading -->
 

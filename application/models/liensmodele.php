@@ -18,7 +18,9 @@
             
             function preview()
             {
-                $this->input->post('title');  
+                $this->input->post('title'); 
+                $this->input->post('desc');  
+                $this->input->post('link');   
             }  
 
             function add()

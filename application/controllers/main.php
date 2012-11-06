@@ -25,7 +25,7 @@
             if($this->members->checkMember($u,$p))
             {
                 $this->session->set_userdata('is_signed_in',true);
-                redirect('site/logged');
+                redirect('site/index');
             }
             else
             {
