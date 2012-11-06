@@ -18,7 +18,9 @@
             
             function preview()
             {
-                $this->input->post('title');  
+                $this->input->post('title'); 
+                $this->input->post('desc');  
+                $this->input->post('link');   
             }  
 
             function add()
@@ -26,7 +28,7 @@
                 $this->db->insert('liens',array('title' => $titre,'desc' => $description, 'link' => $link));
             }  
 
-            function deleteOne($id)
+            function delete($id)
             {
                 $this->db->delete('liens',array('id' => $id));
             }

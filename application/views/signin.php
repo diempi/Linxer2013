@@ -1,18 +1,21 @@
 <?php echo 
     form_open('main/signin').
-    form_label('user','user').
+    form_label('Login','user').
     form_input(array(
                      'name' =>'Login',
                      'id' =>'user',
                      'value' =>''
                      )).
-    form_label('mot de passe','mdp').
+    form_label('Mot de passe','mdp').
     form_password(array(
                      'name' =>'mdp',
                      'id' =>'mdp'
                      )).
+    form_label('','').
     form_submit(array(
-                      'value' =>'Connexion'
+                      'value' =>'Connexion',
+                      'class' => 'btn',
+                      'name' => 'Connexion'
                      )).
     form_close();
 

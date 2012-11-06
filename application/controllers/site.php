@@ -90,6 +90,16 @@
             }*/               
         }
         
+        function edit_preview($id)
+        {
+            $this->load->model('liensModele');
+            $data['id'] = $this->input->post('id');   
+            $this->load->view('vueAdd.php',$dataout);         
+        }
+        function confirm()
+        {
+            $this->load->view('confirm');
+        }
         function add($dataout)
         {
             $this->load->model('liensModele');
@@ -108,9 +118,9 @@
         function delete()
         {
             $this->load->model('liensModele');
-            $id = $this->uri->segment(3);
+            $this->liensModele->delete($this->uri->segment(3));
 
-            deleteOne($id);
+            /*deleteOne($id);
             if($this->input->is_ajax_request())
                 {
                     echo ("ok");
@@ -119,7 +129,7 @@
             {
                 $data['vue']="ok";
                 $this->load->view("ok");
-            }
+            }*/
             $this->index();
         }
 
