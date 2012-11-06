@@ -77,11 +77,11 @@
             $this->load->view('vueAdd.php',$dataout);
             //var_dump($dataout);
            /* echo('<p>Titre du site: '.$title.' </p>');
-            echo('<p>Description: '.$description.' </p>');
-            */foreach ($pictures[1] as $picture ) {
+            echo('<p>Description: '.$description.' </p>');*/
+            foreach ($pictures[1] as $picture ) {
                 //Creation de la miniature
                 
-               /* $config['image_library'] = 'gd';
+                $config['image_library'] = 'gd';
                 $config['source_image'] = $picture;                
                 $config['new_image'] = $_SERVER['DOCUMENT_ROOT'].'/linkser/img/thumbs/'.$picture;                  
                 //$config['source_image'] = '$picture';
@@ -90,7 +90,7 @@
                 $config['width']     = 75;
                 $config['height']   = 80;
                 $this->load->library('image_lib', $config);
-                $this->image_lib->initialize($config); */
+                $this->image_lib->initialize($config); 
                 //var_dump($picture);
                 if ( ! $this->image_lib->resize())
                 {
