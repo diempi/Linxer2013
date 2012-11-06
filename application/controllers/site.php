@@ -47,15 +47,18 @@
             
 
             // Recuperation de la description
-            $startchar = substr($sitetitle, 0, 4);
-            if (!($startchar == 'http'))
+            $startchar = substr($sitetitle, 0, 6);
+            $url = $sitetitle;
+            if (($startchar != 'http:/') &&  ($startchar != 'https:'))
             {
-                $url = 'http://'.$sitetitle;
+                $url = 'http://'.$url;
             }
-            else
+            if(substr($sitetitle, -1)!='/')
             {
-                $url = $sitetitle;
+                $url = $url.'/';
             }
+                
+             
 
             if (preg_match('#<meta name=[\"|\']description["\|\'] content=["\|\'](.*)["\|\']#i',$res))
             {
@@ -81,7 +84,7 @@
             foreach ($pictures[1] as $picture ) {
                 //Creation de la miniature
                 
-                $config['image_library'] = 'gd';
+                /*$config['image_library'] = 'gd';
                 $config['source_image'] = $picture;                
                 $config['new_image'] = $_SERVER['DOCUMENT_ROOT'].'/linkser/img/thumbs/'.$picture;                  
                 //$config['source_image'] = '$picture';
@@ -91,13 +94,34 @@
                 $config['height']   = 80;
                 $this->load->library('image_lib', $config);
                 $this->image_lib->initialize($config); 
-                //var_dump($picture);
+                var_dump($picture);
                 if ( ! $this->image_lib->resize())
                 {
                     echo $this->image_lib->display_errors();
                 }
-                $pict = $this->image_lib->resize();
-                echo('<li><img src="'.$picture.'" /></li>');
+                $pict = $this->image_lib->resize();*/
+                if (strstr($picture, '/'))
+                    {
+                        /* On verifie si la cchaine commence par un . ou /*/
+                        if(substr($picture, 0, 1)== '/') {
+                            $picture = $url.substr($picture, 1);
+                        }
+                        elseif(substr($picture, 0, 1)== '.'){
+                            $picture = $url.$picture;
+                        }
+                    }
+                    else
+                    {
+                        $picture = $url.$picture;
+                    }
+                    $test = get_headers($picture);
+                    //var_dump($test);
+                    if(($test[0])=='HTTP/1.1 200 OK')
+                    {   
+                            echo('<li><img src="'.$picture.'" /></li>');    
+                                               
+                    }
+                
             }               
         }
         
