@@ -1,0 +1,46 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+h1{
+	font-size: 2em !important;
+	margin-bottom: 0.5em !important;
+}
+
+h1.brand{
+	margin: 0 !important;
+	padding: 0.1em;
+	text-transform: uppercase;
+	color: #fff;
+	width: 80%;
+}
+
+
+.navbar-inner form {
+    height: 1em;
+    margin-bottom: 0;
+    padding: 1.3em 0;
+}
+
+#main {
+	margin-top: 6em;
+}
+
+footer p{
+	color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
