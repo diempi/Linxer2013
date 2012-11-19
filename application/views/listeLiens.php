@@ -12,6 +12,13 @@
             <div class="navbar-inner">
                 <div class="container">
                         <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
+                                            <?php echo 
+            form_open('main/signoff').
+            form_submit(array(
+                              'value' =>'Se deconnecter',
+                              'class','btn'
+                             )).
+            form_close(); ?>
                 </div>
               </div>
          </div>
@@ -43,15 +50,6 @@
                     <?php        
                         }
                     ?>
-                    
-         
-                    <?php echo 
-            form_open('main/signoff').
-            form_submit(array(
-                              'value' =>'Se deconnecter',
-                              'class','btn'
-                             )).
-            form_close(); ?>
                 </ul>
       </div>
         <!-- Scripts-->

@@ -51,7 +51,7 @@
     </div>
   </div> <!--! end of #container -->
     <footer>
-            <p>© Coded by Didier Gabiam</p>
+            <p>© DIEMPI YE WE</p>
     </footer>
 
   <!-- JavaScript at the bottom for fast page loading -->
