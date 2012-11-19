@@ -40,6 +40,7 @@
             <div class="navbar-inner">
                 <div class="container">
                         <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
+
                 </div>
             </div>
         </div>

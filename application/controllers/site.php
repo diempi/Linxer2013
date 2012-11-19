@@ -48,6 +48,10 @@
                     preg_match('#<title>(.*)<\/title>#i',$res,$reg_title);
                     $title = $reg_title[1];                
                 }
+                else
+                {
+                    $title = "Veuillez entrer un titre";
+                }
 
                 //var_dump($reg_title);
                 
@@ -71,6 +75,10 @@
                     preg_match('#<meta name=[\"|\']description["\|\'] content=["\|\'](.*)["\|\']#i',$res,$desc);
                     $description = $desc[1];                
                 }
+                else
+                {
+                    $description = 'Veuillez entrer une description';
+                }
                 
 
                 // Recuperation des images
@@ -78,34 +86,19 @@
                 {
                     preg_match_all('#<img src=["\|\']([^\'"]*)["\|\']#i',$res,$pictures);                
                 }            
-                var_dump($description);
-                $data['title'] = $sitetitle;
+                //var_dump($desc);
+                $data['title'] = $title;
                 $data['desc'] = $description;
                 $data['link'] = $url;
-                $dataout = array('titre' => $data['title'],'description' => $data['desc'], 'link'=>$data['link'] );
+                $dataout = array('titre' => $title,'description' => $description, 'link'=>$url );
+
                 $this->load->view('vueAdd.php',$dataout);
+
                 //var_dump($dataout);
                /* echo('<p>Titre du site: '.$title.' </p>');
                 echo('<p>Description: '.$description.' </p>');*/
                 foreach ($pictures[1] as $picture ) {
                     //Creation de la miniature
-                    
-                    /*$config['image_library'] = 'gd';
-                    $config['source_image'] = $picture;                
-                    $config['new_image'] = $_SERVER['DOCUMENT_ROOT'].'/linkser/img/thumbs/'.$picture;                  
-                    //$config['source_image'] = '$picture';
-                    $config['create_thumb'] = TRUE;
-                    $config['maintain_ratio'] = TRUE;
-                    $config['width']     = 75;
-                    $config['height']   = 80;
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->initialize($config); 
-                    var_dump($picture);
-                    if ( ! $this->image_lib->resize())
-                    {
-                        echo $this->image_lib->display_errors();
-                    }
-                    $pict = $this->image_lib->resize();*/
                     if (strstr($picture, '/'))
                         {
                             /* On verifie si la cchaine commence par un . ou /*/
@@ -127,7 +120,23 @@
                                 echo('<li><img src="'.$picture.'" /></li>');    
                                                    
                         }
+                    /*$config['image_library'] = 'gd';
+                    $config['source_image'] = $picture;                
+                    $config['new_image'] = $_SERVER['DOCUMENT_ROOT'].'/linkser/img/thumbs/'.$picture;                  
+                    //$config['source_image'] = '$picture';
+                    $config['create_thumb'] = TRUE;
+                    $config['maintain_ratio'] = TRUE;
+                    $config['width']     = 75;
+                    $config['height']   = 80;
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->initialize($config); 
                     
+                    if ( ! $this->image_lib->resize())
+                    {
+                        echo $this->image_lib->display_errors();
+                    }
+                    $pict = $this->image_lib->resize();
+                    */
                 }                   
             }
             
@@ -135,6 +144,7 @@
         
         function edit_preview()
         {
+            $this->liensModele->selectOne($this->input->post('id'));
             $this->preview();        
         }
         function confirm()
@@ -144,9 +154,11 @@
             $data['link'] = $this->input->post('link');  
             $this->load->view('confirm');
         }
-        function add($dataout)
+        function add()
         {
-            $this->liensModele->add($db_updated);
+            var_dump($description);
+            $this->db->insert('liens',$db_updated);
+            //$this->liensModele->add($db_updated);
             $this->index();
         }
 
