@@ -12,22 +12,32 @@
             <div class="navbar-inner">
                 <div class="container">
                         <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
+                        <?php echo 
+                        form_open('main/signoff').
+                        form_submit(array(
+                                          'value' =>'Se deconnecter',
+                                          'class','btn'
+                                         )).
+                        form_close(); ?>
                 </div>
               </div>
          </div>
         <div id="main" role="main" class="hero-unit">
             <?php echo(form_open('site/update',$this->uri->segment(3))); ?>
-                 <?php echo(form_label('Modifier le lien','url')); ?>
+                 <?php echo(form_label('Modifier le lien','link')); ?>
                  
                   <?php echo(form_input(array(
-                                              'name' => 'url',
-                                              'id' => 'url',
-                                              'value' => $lien->url
+                                              'name' => 'link',
+                                              'id' => 'link',
+                                              'value' => $link
                                               ))); ?>
                     <?php echo(form_hidden('id',$lien->id)); ?>
                 <?php echo(form_submit('Envoi','Modifier')); ?>  
             <?php echo(form_close()); ?>
       </div>
+      <footer>
+        <p>© DIEMPI YE WE</p>
+      </footer>
         <!-- Scripts-->
                <script type="text/javascript" src="http://localhost/linkser/jquery.js"></script>
         <script type="text/javascript" src="http://localhost/linkser/script.js"></script> 

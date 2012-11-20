@@ -40,6 +40,7 @@
             <div class="navbar-inner">
                 <div class="container">
                         <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
+
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
     </div>
   </div> <!--! end of #container -->
     <footer>
-            <p>© Coded by Didier Gabiam</p>
+            <p>© DIEMPI YE WE</p>
     </footer>
 
   <!-- JavaScript at the bottom for fast page loading -->

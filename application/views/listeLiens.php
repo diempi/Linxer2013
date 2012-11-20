@@ -12,6 +12,15 @@
             <div class="navbar-inner">
                 <div class="container">
                         <a href="<?php index_page(); ?>"><h1 class="brand">Linkser</h1></a>
+                        <?php echo 
+                        form_open('main/signoff').
+                        form_submit(array('Submit'=>'Oui',
+                                          'type'=>'Submit',
+                                          'value' =>'Se deconnecter',
+                                          'type'=>'Submit',
+                                          'class','btn'
+                                         )).
+                        form_close(); ?>
                 </div>
               </div>
          </div>
@@ -25,7 +34,12 @@
                                                       'value' => '',
                                                       'placeholder' => 'Entrez une URL'
                                                       ))); ?>
-                        <?php echo(form_submit('Envoi','OK')); ?>
+              <?php echo(form_submit(array('Submit'=>'Oui',
+                                           'type'=>'Submit',
+                                           'value'=>'Previsualiser',
+                                           'name'=>'Oui',
+                                           'class'=>'btn' 
+              ))) ;?>
                     
                     <?php echo(form_close()); ?>
                     <div id="resultbox">
@@ -39,21 +53,17 @@
                         foreach($liens as $lien)
                         {
                     ?>
-                            <li><?php echo($lien->title); ?>  <?php echo(anchor('site/edit_preview/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
+                            <li><?php echo($lien->title); ?>  <?php echo(anchor('site/selectOne/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
                     <?php        
                         }
                     ?>
-                    
-         
-                    <?php echo 
-            form_open('main/signoff').
-            form_submit(array(
-                              'value' =>'Se deconnecter',
-                              'class','btn'
-                             )).
-            form_close(); ?>
                 </ul>
       </div>
+      
+      
+      <footer>
+        <p>© DIEMPI YE WE</p>
+      </footer>
         <!-- Scripts-->
                <script type="text/javascript" src="http://localhost/linkser/jquery.js"></script>
         <script type="text/javascript" src="http://localhost/linkser/script.js"></script> 
