@@ -156,10 +156,10 @@
         }
         function add()
         {
-            var_dump($description);
-            $this->db->insert('liens',$db_updated);
-            //$this->liensModele->add($db_updated);
-            $this->index();
+            //var_dump($title);
+            $this->load->model('liensModele');
+            $this->liensModele->add($this->input->post('title'),$this->input->post('desc'),$this->input->post('link'));                     
+            redirect('site');
         }
 
         function update()

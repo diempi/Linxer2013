@@ -42,9 +42,6 @@
                                               'value' => $link
                                               ))); ?>                                                                                                                                         
                     <?php echo(form_hidden('id',$this->uri->segment(3))); ?>
-                    <?php 
-                      $db_updated = array('title' => $titre,'desc'=> $description, 'link' => $link );
-                    ; ?>
                 <?php echo(form_submit(array('value'=>'Ajouter',
                                               'class'=>'btn'
                                       ))) ;?>  

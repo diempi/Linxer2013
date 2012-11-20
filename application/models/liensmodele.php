@@ -23,10 +23,11 @@
                 $this->input->post('link');   
             }  
 
-            function add()
+            function add($title,$desc,$link)
             {
-                $this->db->insert('liens',array('title' => $titre,'desc' => $description, 'link' => $link));
+                $this->db->insert('liens',array('title' => $title,'desc' => $desc, 'link' => $link));
             }  
+
 
             function deleteOne($id)
             {
