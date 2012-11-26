@@ -39,9 +39,9 @@
                 return ($query->result());  
             }
 
-            function update($id)
+            function update($data)
             {
-               $this->db->where('id',$id);
-               $this->db->update('liens',array('title' => $data['title']));
+               $this->db->where('id',$this->uri->segment(3));
+               $this->db->update('liens',array('desc' => $data['desc'],'link' => $data['link']));                             
             }
         }

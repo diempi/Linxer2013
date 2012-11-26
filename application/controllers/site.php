@@ -144,7 +144,7 @@
         
         function edit_preview()
         {
-            $this->liensModele->selectOne($this->input->post('id'));
+            //$this->liensModele->selectOne($this->input->post('id'));
             $this->preview();        
         }
         function confirm()
@@ -164,11 +164,12 @@
 
         function update()
         {
-           $data['id'] = $this->input->post('id');
-           $data['title'] = $this->input->post('title'); 
+           $this->load->model('liensModele');
+           $data['id'] = $this->uri->segment(3); 
            $data['desc'] = $this->input->post('desc');               
            $data['link'] = $this->input->post('link');  
            $this->liensModele->update($this->uri->segment(3));
+           redirect('site');
         }
         
         function delete()
@@ -190,9 +191,10 @@
 
         function selectOne()
         {
+            $this->load->model('liensModele');
             $data['lien'] = $this->liensModele->selectOne($this->uri->segment(3));
             $this->load->view('vueUpdate',$data);
             $this->liensModele->update($this->uri->segment(3));
-        }        
+        }       
         
     }

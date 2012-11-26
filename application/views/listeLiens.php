@@ -53,7 +53,7 @@
                         foreach($liens as $lien)
                         {
                     ?>
-                            <li><?php echo($lien->title); ?>  <?php echo(anchor('site/edit_preview/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
+                            <li><?php echo($lien->title); ?>  <?php echo(anchor('site/selectOne/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
                     <?php        
                         }
                     ?>
