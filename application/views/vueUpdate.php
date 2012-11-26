@@ -25,13 +25,19 @@
         <div id="main" role="main" class="hero-unit">
             <?php echo(form_open('site/update',$this->uri->segment(3))); ?>
                  <?php echo(form_label('Modifier le lien','link')); ?>
-                 
+                 Description:
+                  <?php echo(form_input(array(
+                                              'name' => 'desc',
+                                              'id' => 'desc',
+                                              'value' => $lien[0]->desc
+                                              ))); ?>
+                  Lien:                                             
                   <?php echo(form_input(array(
                                               'name' => 'link',
                                               'id' => 'link',
-                                              'value' => $link
+                                              'value' => $lien[0]->link
                                               ))); ?>
-                    <?php echo(form_hidden('id',$lien->id)); ?>
+                    <?php echo(form_hidden('id',$this->uri->segment(3))); ?>
                 <?php echo(form_submit('Envoi','Modifier')); ?>  
             <?php echo(form_close()); ?>
       </div>
