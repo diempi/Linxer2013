@@ -165,10 +165,11 @@
         function update()
         {
            $this->load->model('liensModele');
-           $data['id'] = $this->uri->segment(3); 
+           $data['id'] = $this->input->post('id'); 
+           $data['title'] = $this->input->post('title');
            $data['desc'] = $this->input->post('desc');               
            $data['link'] = $this->input->post('link');  
-           $this->liensModele->update($this->uri->segment(3));
+           $this->liensModele->update($data);
            redirect('site');
         }
         
@@ -193,8 +194,10 @@
         {
             $this->load->model('liensModele');
             $data['lien'] = $this->liensModele->selectOne($this->uri->segment(3));
+            //var_dump($data);
+            //DIE();
             $this->load->view('vueUpdate',$data);
-            $this->liensModele->update($this->uri->segment(3));
+            //$this->liensModele->update($this->input->post('id'));
         }       
         
     }

@@ -36,12 +36,14 @@
             function selectOne($id)
             {
                 $query = $this->db->get_where('liens',array('id' => $id));
-                return ($query->result());  
+                return ($query->row());  
             }
 
             function update($data)
             {
-               $this->db->where('id',$this->uri->segment(3));
-               $this->db->update('liens',array('desc' => $data['desc'],'link' => $data['link']));                             
+                //var_dump($data);
+                //DIE();
+               $this->db->where('id',$data['id']);
+               $this->db->update('liens',array('title' => $data['title'], 'desc' => $data['desc'],'link' => $data['link']));                             
             }
         }

@@ -22,7 +22,7 @@
               </div>
          </div>
         <div id="main" role="main" class="hero-unit">
-            <?php echo(form_open('site/add',$this->uri->segment(3))); ?>
+            <?php echo(form_open('site/add',$this->input->post('id'))); ?>
                  <?php echo(form_label('Ajouter le lien','url')); ?>
                  
                   <?php echo(form_input(array(
@@ -41,7 +41,7 @@
                                               'id' => 'link',
                                               'value' => $link
                                               ))); ?>                                                                                                                                         
-                    <?php echo(form_hidden('id',$this->uri->segment(3))); ?>
+                    <?php echo(form_hidden('id',$this->input->post('id'))); ?>
                 <?php echo(form_submit(array('value'=>'Ajouter',
                                               'class'=>'btn'
                                       ))) ;?>  
