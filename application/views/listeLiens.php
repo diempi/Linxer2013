@@ -27,10 +27,10 @@
         <div id="main" role="main" class="hero-unit">
                 <div id="linksearch">
                         <?php echo(form_open('site/preview')); ?>
-                         <?php echo(form_label('Lien a ajouter ','title')); ?>
+                         <?php echo(form_label('Lien a ajouter ','siteurl')); ?>
                           <?php echo(form_input(array(
-                                                      'name' => 'title',
-                                                      'id' => 'title',
+                                                      'name' => 'siteurl',
+                                                      'id' => 'siteurl',
                                                       'value' => '',
                                                       'placeholder' => 'Entrez une URL'
                                                       ))); ?>
@@ -53,7 +53,7 @@
                         foreach($liens as $lien)
                         {
                     ?>
-                            <li><?php echo($lien->title); ?>  <?php echo(anchor('site/selectOne/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
+                            <li><?php echo($lien->title.' || '.$lien->link); ?>  <?php echo(anchor('site/selectOne/'.$lien->id,'modifier',array('title' => 'Modifier ce lien'))); ?>  - <?php echo(anchor('site/confirm/'.$lien->id,'supprimer',array('title' => 'Supprimer ce lien')) ); ?>  </li>
                     <?php        
                         }
                     ?>

@@ -25,7 +25,7 @@
         function preview()
         {
 
-            $sitetitle = $this->input->post('title');
+            $sitetitle = $this->input->post('siteurl');
             if(filter_var($sitetitle, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) {
                 echo 'Veuillez entrer une URL valide';
             }
@@ -61,12 +61,19 @@
                 $url = $sitetitle;
                 if (($startchar != 'http:/') &&  ($startchar != 'https:'))
                 {
-                    $url = 'http://'.$url;
+                    /*if(substr($sitetitle, 0, 3) != 'www')
+                    {
+                        $url = 'http://www'.$url;
+                    }
+                    else
+                    {*/
+                        $url = 'http://'.$url;
+                   /* }*/
                 }
-                if(substr($sitetitle, -1)!='/')
+                /*if(substr($sitetitle, -1)!='/')
                 {
                     $url = $url.'/';
-                }
+                }*/
                     
                  
 
@@ -80,64 +87,22 @@
                     $description = 'Veuillez entrer une description';
                 }
                 
+                //Recuperation des images
+                // Appel du helper
+                //echo ('Titre'.$title);
+                //echo ('Description'.$description);
+                $this->load->helper('images_helper');
+                //echo get_picts($res,$url);
 
-                // Recuperation des images
-                if (preg_match('#<img src=["\|\']([^\'"]*)["\|\']#i',$res))
-                {
-                    preg_match_all('#<img src=["\|\']([^\'"]*)["\|\']#i',$res,$pictures);                
-                }            
-                //var_dump($desc);
+
+          
+                //Assignation des valeurs 
                 $data['title'] = $title;
                 $data['desc'] = $description;
                 $data['link'] = $url;
-                $dataout = array('titre' => $title,'description' => $description, 'link'=>$url );
+                confirm();
 
-                $this->load->view('vueAdd.php',$dataout);
-
-                //var_dump($dataout);
-               /* echo('<p>Titre du site: '.$title.' </p>');
-                echo('<p>Description: '.$description.' </p>');*/
-                foreach ($pictures[1] as $picture ) {
-                    //Creation de la miniature
-                    if (strstr($picture, '/'))
-                        {
-                            /* On verifie si la cchaine commence par un . ou /*/
-                            if(substr($picture, 0, 1)== '/') {
-                                $picture = $url.substr($picture, 1);
-                            }
-                            elseif(substr($picture, 0, 1)== '.'){
-                                $picture = $url.$picture;
-                            }
-                        }
-                        else
-                        {
-                            $picture = $url.$picture;
-                        }
-                        $test = get_headers($picture);
-                        //var_dump($test);
-                        if(($test[0])=='HTTP/1.1 200 OK')
-                        {   
-                                echo('<li><img src="'.$picture.'" /></li>');    
-                                                   
-                        }
-                    /*$config['image_library'] = 'gd';
-                    $config['source_image'] = $picture;                
-                    $config['new_image'] = $_SERVER['DOCUMENT_ROOT'].'/linkser/img/thumbs/'.$picture;                  
-                    //$config['source_image'] = '$picture';
-                    $config['create_thumb'] = TRUE;
-                    $config['maintain_ratio'] = TRUE;
-                    $config['width']     = 75;
-                    $config['height']   = 80;
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->initialize($config); 
-                    
-                    if ( ! $this->image_lib->resize())
-                    {
-                        echo $this->image_lib->display_errors();
-                    }
-                    $pict = $this->image_lib->resize();
-                    */
-                }                   
+                  
             }
             
         }
@@ -165,10 +130,11 @@
         function update()
         {
            $this->load->model('liensModele');
-           $data['id'] = $this->uri->segment(3); 
+           $data['id'] = $this->input->post('id'); 
+           $data['title'] = $this->input->post('title');
            $data['desc'] = $this->input->post('desc');               
            $data['link'] = $this->input->post('link');  
-           $this->liensModele->update($this->uri->segment(3));
+           $this->liensModele->update($data);
            redirect('site');
         }
         
@@ -193,8 +159,10 @@
         {
             $this->load->model('liensModele');
             $data['lien'] = $this->liensModele->selectOne($this->uri->segment(3));
+            //var_dump($data);
+            //DIE();
             $this->load->view('vueUpdate',$data);
-            $this->liensModele->update($this->uri->segment(3));
+            //$this->liensModele->update($this->input->post('id'));
         }       
         
     }

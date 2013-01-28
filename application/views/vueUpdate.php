@@ -23,21 +23,27 @@
               </div>
          </div>
         <div id="main" role="main" class="hero-unit">
-            <?php echo(form_open('site/update',$this->uri->segment(3))); ?>
+            <?php echo(form_open('site/update')); ?>
                  <?php echo(form_label('Modifier le lien','link')); ?>
+                 Titre:
+                  <?php echo(form_input(array(
+                                              'name' => 'title',
+                                              'id' => 'title',
+                                              'value' => $lien->title
+                                              ))); ?>                 
                  Description:
                   <?php echo(form_input(array(
                                               'name' => 'desc',
                                               'id' => 'desc',
-                                              'value' => $lien[0]->desc
+                                              'value' => $lien->desc
                                               ))); ?>
                   Lien:                                             
                   <?php echo(form_input(array(
                                               'name' => 'link',
                                               'id' => 'link',
-                                              'value' => $lien[0]->link
+                                              'value' => $lien->link
                                               ))); ?>
-                    <?php echo(form_hidden('id',$this->uri->segment(3))); ?>
+                    <?php echo(form_hidden('id',$lien->id)); ?>
                 <?php echo(form_submit('Envoi','Modifier')); ?>  
             <?php echo(form_close()); ?>
       </div>
