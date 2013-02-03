@@ -89,18 +89,19 @@
                 
                 //Recuperation des images
                 // Appel du helper
-                //echo ('Titre'.$title);
-                //echo ('Description'.$description);
+                echo ('Titre'.$title);
+                echo ('Description'.$description);
                 $this->load->helper('images_helper');
-                //echo get_picts($res,$url);
+                echo get_picts($res,$url);
 
+                $this->load->view('vueAdd.php',$title,$description,$Tabm);
 
           
                 //Assignation des valeurs 
                 $data['title'] = $title;
                 $data['desc'] = $description;
                 $data['link'] = $url;
-                confirm();
+                
 
                   
             }

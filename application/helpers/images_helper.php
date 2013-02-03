@@ -18,8 +18,7 @@
         }  */
         preg_match_all('#<img src=["\|\']([^\'"]*)["\|\']#i',$res,$pictures); 
 
-
-echo (microtime());
+    //var $TabImg = new array();   
     foreach ($pictures[1] as $picture ) {
                     //Verification de l'url de l'image
                  /*   if (strstr($picture, '/'))
@@ -33,8 +32,7 @@ echo (microtime());
                             }
                         }*/
 
-                        echo ($picture);
-                        echo ($url);
+                        echo $picture;
                         $absUrl = url_to_absolute($url,$picture);
 
                         $url_test = get_headers($absUrl);
@@ -65,7 +63,6 @@ echo (microtime());
                     $pict = $this->image_lib->resize();
                     */
         }
-        echo microtime();
     }  
     
 ?>
