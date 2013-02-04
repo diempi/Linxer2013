@@ -28,13 +28,13 @@
                   <?php echo(form_input(array(
                                               'name' => 'title',
                                               'id' => 'title',
-                                              'value' => $titre
+                                              'value' => $title
                                               ))); ?>
 
                   <?php echo(form_textarea(array(
                                               'name' => 'desc',
                                               'id' => 'desc',
-                                              'value' => $description
+                                              'value' => $desc
                                               ))); ?>  
                   <?php echo(form_input(array(
                                               'name' => 'link',

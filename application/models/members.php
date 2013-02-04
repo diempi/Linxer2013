@@ -11,5 +11,9 @@
             $row = $this->db->get_where('members',array('username'=>$user,'password'=>$password));
             return $row->num_rows();
         }
+
+        /*function addMember(){
+            $this->db->insert('members',array('username' => $username,'password' => $pass, 'email' => $email));
+        }*/
     }
 ?>

@@ -89,20 +89,17 @@
                 
                 //Recuperation des images
                 // Appel du helper
-                echo ('Titre'.$title);
-                echo ('Description'.$description);
+                //echo ('Titre'.$title);
+                //echo ('Description'.$description);
                 $this->load->helper('images_helper');
-                echo get_picts($res,$url);
-
-                $this->load->view('vueAdd.php',$title,$description,$Tabm);
-
+                //echo get_picts($res,$url);
           
                 //Assignation des valeurs 
                 $data['title'] = $title;
                 $data['desc'] = $description;
                 $data['link'] = $url;
                 
-
+                $this->load->view('vueAdd.php',$data);
                   
             }
             
@@ -165,5 +162,13 @@
             $this->load->view('vueUpdate',$data);
             //$this->liensModele->update($this->input->post('id'));
         }       
+
+        function add_member(){
+            $username = $this->input->post('username');
+            $pass = sha1($this->input->post('password')); 
+            $email = $this->input->post('email');
+            $this->db->insert('members',array('username' => $username,'password' => $pass, 'email' => $email));
+            $this->load->view('new_member_added');           
+        }
         
     }

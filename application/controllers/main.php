@@ -34,6 +34,10 @@
                 redirect('main/index');
             }
        }
+
+        function signup(){
+            $this->load->view('new_member');
+        }
        
        function signoff()
        {

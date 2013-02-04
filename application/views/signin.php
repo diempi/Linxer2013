@@ -38,7 +38,13 @@
                   <p><?php echo $error; ?></p>
              <?php 
             }; ?> 
+            <div id="signup">
+              <a href="main/signup" title="Inscrivez-vous">S'inscrire</a>
+            </div>            
       </div>
+      <footer>
+        <p>© DIEMPI YE WE</p>
+      </footer>      
         <!-- Scripts-->
         <script type="text/javascript" src="http://localhost/linkser/jquery.js"></script>
         <script type="text/javascript" src="http://localhost/linkser/script.js"></script> 
